@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+main() {
+  cmd_track_id="playerctl metadata mpris:trackid"
+  cmd_title="playerctl metadata title"
+  cmd_artist="playerctl metadata artist"
+  cmd_status="playerctl status"
+  status="$($cmd_status 2>&1)"
+   # declare even if not needed. Always nice to have a backup
+  result="An error occurred"
+
+  if is_ad "$($cmd_track_id 2>&1)" == "true" ; then
+    result="Advert"
+    if [[ $status == "Paused" ]]; then
+      result="(Paused) $result"
+    fi
+    echo "$result"
+    # Mute spotify
+    ControlProgramMuteStatus Spotify mute
+    return
+  fi
+
+  if [[ $status == *"No players found"* ]]; then
+    # No player running ==> Hide notification
+    result=""
+  elif [[ $status == "Stopped" ]]; then
+    result="Player running, but stopped"
+  else
+    result="$($cmd_title 2>&1) - $($cmd_artist 2>&1)"
+    if [[ $status == "Paused" ]]; then
+      result="(Paused) $result"
+    fi
+  fi
+  echo "$result"
+
+  # Unmute if it was not an ad
+  ControlProgramMuteStatus Spotify unmute
+}
+
+is_ad() {
+  if [[ "$1" == *":ad:"* ]]; then
+    # is ad
+    return
+  fi
+  # is no ad
+  false
+  return
+}
+
+main "$@"
