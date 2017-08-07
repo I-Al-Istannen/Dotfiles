@@ -4,7 +4,7 @@ execute_python_copy_script() {
     python update_repo_files.py "$@"
 }
 
-options="Copy-to-repo Copy-from-repo Restore-Backup"
+options="Copy-to-repo Copy-from-repo Restore-Backup Exit"
 select opt in ${options}; do
     if [[ "$opt" = "Copy-to-repo" ]]; then
         echo "Okay. Installing files."
@@ -15,6 +15,9 @@ select opt in ${options}; do
         exit
     elif [ "$opt" = "Restore-Backup" ]; then
         execute_python_copy_script --restore-backup
+        exit
+    elif [ "$opt" = "Exit" ]; then
+        echo "Bye :)"
         exit
     else
         clear
