@@ -26,7 +26,7 @@ if dein#load_state('~/.vim/dein')
 
 
   " Completion for Python
-  call dein#add('zchee/deoplete-jedi')
+  call dein#add('zchee/deoplete-jedi', {'on_ft': ['python']})
   " File browser? This nice little bar replaces that.
   call dein#add('scrooloose/nerdtree')
   " The undotree can be fascinating, just hard to navigate
@@ -53,7 +53,7 @@ if dein#load_state('~/.vim/dein')
 
   "  call dein#add('donRaphaco/neotex')
  
-  call dein#add('PotatoesMaster/i3-vim-syntax')
+  call dein#add('PotatoesMaster/i3-vim-syntax', {'on_ft': ['i3']})
 
   " Color Schemes
   call dein#add('mhartington/oceanic-next')
@@ -165,7 +165,12 @@ set clipboard+=unnamedplus
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-
+" The character at the beginning of a wrapped line.
+set showbreak=↪\ 
+" The list chars. Possible value for "eol:↲" 
+set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+" Activate the display of list chars.
+set list
 
 " }}}
 
