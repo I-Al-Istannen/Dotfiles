@@ -151,6 +151,13 @@ let g:airline_theme='oceanicnext'
 colorscheme OceanicNext
 " }}}
 
+" Syntax additions {{{
+
+" Java: 'new', 'instanceof'
+highlight Operator ctermfg=5  guifg=#d175bc
+
+" }}}
+
 " General SET commands {{{
 
 " Show line numbers

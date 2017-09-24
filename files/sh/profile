@@ -3,3 +3,5 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 export PATH="${PATH}:/usr/lib/ruby/gems/2.4.0:/home/$(whoami)/.gem/ruby/2.4.0/bin"
 export EDITOR="nvim"
+
+setxkbmap -option compose:rctrl
