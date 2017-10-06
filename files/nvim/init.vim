@@ -41,7 +41,11 @@ if dein#load_state('~/.vim/dein')
   call dein#add('w0rp/ale')
   " Sets the indentation depth to a heuristically determined value
   call dein#add('tpope/vim-sleuth')
+  " Tex!
+  " call dein#add('lervag/vimtex', {'on_ft': ['tex']})
   call dein#add('lervag/vimtex', {'on_ft': ['tex']})
+  " Generate tex tags
+  call dein#add('ludovicchabant/vim-gutentags', {'on_ft': ['tex']})
   " Surround text with brackets or whatever you choose.
   call dein#add('tpope/vim-surround')
   " Align data and create tables the easy way.
@@ -82,6 +86,12 @@ let g:airline_symbols = {}
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers=2
  " }}}
+
+" VimTeX + Deoplete
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 " Indent lines
 let g:indentLine_char = '▏'
@@ -135,6 +145,10 @@ nmap <Space>    za
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#comment5906101_657484
 command C let @/=""
 
+" Set the leader char
+let mapleader = ","
+let maplocalleader = ","
+
 " Format Json using python
 com! FormatJSON %!python -m json.tool
 " }}}
@@ -179,5 +193,12 @@ set listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 " Activate the display of list chars.
 set list
 
+" Enable case insensitive search
+set ignorecase
+" Enable case sensitiue search when your pattern contains an uppercase letter otherwise it will be insensitive
+set smartcase
+
+" Tex flavour
+let g:tex_flavor = 'latex'
 " }}}
 
