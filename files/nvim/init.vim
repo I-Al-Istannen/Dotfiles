@@ -34,13 +34,15 @@ if dein#load_state('~/.vim/dein')
   " Delimeters should be closed, shouldb't they?
   call dein#add('Raimondi/delimitMate')
   " A small status line
-  call dein#add('vim-airline/vim-airline')
+"  call dein#add('vim-airline/vim-airline')
   " A git integration
   call dein#add('tpope/vim-fugitive')
   " A linter engine
   call dein#add('w0rp/ale')
   " Sets the indentation depth to a heuristically determined value
   call dein#add('tpope/vim-sleuth')
+  " Online thesaurus!
+"  call dein#add('Ron89/thesaurus_query.vim')
   " Tex!
   " call dein#add('lervag/vimtex', {'on_ft': ['tex']})
   call dein#add('lervag/vimtex', {'on_ft': ['tex']})
@@ -56,7 +58,7 @@ if dein#load_state('~/.vim/dein')
   call dein#add('Yggdroot/indentLine')
 
   "  call dein#add('donRaphaco/neotex')
- 
+
   call dein#add('PotatoesMaster/i3-vim-syntax', {'on_ft': ['i3']})
 
   " Color Schemes
@@ -77,14 +79,14 @@ endif
 
 " Plugin settings {{{
 " Airline {{{
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers=2
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_symbols = {}
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers=2
+"let g:airline#extensions#ale#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#show_buffers=2
+"let g:airline_left_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_symbols = {}
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#show_buffers=2
  " }}}
 
 " VimTeX + Deoplete
@@ -95,6 +97,10 @@ let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
 " Indent lines
 let g:indentLine_char = '▏'
+
+" Thesaurus
+let g:tq_enabled_backends=["thesaurus_com","woxikon_de","openoffice_en"]
+let g:tq_language=["de", "en"]
 " }}}
 
 " Plugin commands {{{
@@ -131,6 +137,9 @@ function! s:TriggerAbb() "{{{
 endfunction "}}}
 map <expr> <Plug>(delimitMateCR) <SID>TriggerAbb()."\<C-R>=delimitMate#ExpandReturn()\<CR>"
 " }}}
+
+" Thesaurus
+nmap <leader>W :ThesaurusQueryLookupCurrentWord<CR>
 " }}}
 
 " Commands and mappings {{{
@@ -171,6 +180,15 @@ colorscheme OceanicNext
 highlight Operator ctermfg=5  guifg=#d175bc
 
 " }}}
+
+" Filetype mappings {{{1
+autocmd FileType tex setlocal spell
+autocmd FileType tex setlocal spelllang=de,en
+autocmd FileType tex setlocal conceallevel=0
+" I have no freaking clue why vim is slow with them
+autocmd FileType tex setlocal norelativenumber
+"}}}1
+
 
 " General SET commands {{{
 
