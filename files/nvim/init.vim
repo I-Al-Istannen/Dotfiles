@@ -6,6 +6,9 @@ endif
 " Required:
 set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
+" I was tired of this plugin not loading correctly
+set runtimepath+=~/.vim/dein/repos/github.com/lervag/vimtex/
+
 filetype plugin indent on
 syntax enable
 
@@ -101,9 +104,12 @@ let g:indentLine_char = '▏'
 " Thesaurus
 let g:tq_enabled_backends=["thesaurus_com","woxikon_de","openoffice_en"]
 let g:tq_language=["de", "en"]
+
+" Neosnippets
+let g:neosnippet#snippets_directory="~/.vim/snippets"
 " }}}
 
-" Plugin commands {{{
+" Plugin commands and mappings {{{
 " deoplete {{{
 function! s:deoplete_lazy_enable()
  autocmd! deoplete_lazy_enable
@@ -117,13 +123,22 @@ augroup deoplete_lazy_enable
         \ | silent! doautocmd <nomodeline> deoplete InsertEnter
 augroup END
 
-"let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
-imap <expr> <silent> <cr> neosnippet#expandable_or_jumpable() ?
-            \ "<Plug>(neosnippet_expand_or_jump)" :
-            \ "\<CR>"
 autocmd CompleteDone * pclose
 " }}}
+
+" Neosnippet {{{2
+" Use tab to expand
+"imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB>
+      \ neosnippet#expandable_or_jumpable() ?
+      \    "\<Plug>(neosnippet_expand_or_jump)" :
+      \       pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" }}}2
 
 " Delimit mate fix indentation {{{
 " ripped out of delimitMate
@@ -138,8 +153,9 @@ endfunction "}}}
 map <expr> <Plug>(delimitMateCR) <SID>TriggerAbb()."\<C-R>=delimitMate#ExpandReturn()\<CR>"
 " }}}
 
-" Thesaurus
+" Thesaurus {{{
 nmap <leader>W :ThesaurusQueryLookupCurrentWord<CR>
+" }}}
 " }}}
 
 " Commands and mappings {{{
