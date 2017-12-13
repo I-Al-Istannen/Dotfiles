@@ -6,7 +6,7 @@ file_locations: List[Tuple[str, str]] = [
     ("zsh/.zprofile", "~/.zprofile"),
     ("termite/config", "~/.config/termite/config"),
     ("nvim/init.vim", "~/.config/nvim/init.vim"),
-    ("i3/config", "~/.config/i3/config"),
+    ("i3/config", "~/.i3/config"),
     ("polybar/config", "~/.config/polybar/config"),
     ("polybar/pavolume.sh", "~/.config/polybar/pavolume.sh"),
     (

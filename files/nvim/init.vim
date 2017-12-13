@@ -98,6 +98,16 @@ if !exists('g:deoplete#omni#input_patterns')
 endif
 let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
 
+" vimtex luatex
+let g:vimtex_compiler_latexmk = {
+      \ 'options' : [
+      \   '-verbose',
+      \   '-file-line-error',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \ ],
+      \}
+
 " Indent lines
 let g:indentLine_char = '▏'
 
