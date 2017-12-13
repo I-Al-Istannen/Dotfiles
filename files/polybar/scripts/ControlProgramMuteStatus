@@ -1,0 +1,95 @@
+#!/usr/bin/env python3
+
+import shlex
+import sys
+from subprocess import check_output, call
+from typing import List
+
+
+class SinkInformation:
+    def __init__(self, is_muted: bool, index: int):
+        self.is_muted = is_muted
+        self.index = index
+
+    def __str__(self) -> str:
+        return "<SinkInformation: Index: {}, Muted: {}>" \
+            .format(self.index, self.is_muted)
+
+
+def list_all_sinks() -> List[str]:
+    all_sinks = check_output(shlex.split("pacmd list-sink-inputs"))
+
+    sinks = []
+    for part in all_sinks.split(b"index:"):
+        sinks.append("index:" + part.decode())
+
+    return sinks
+
+
+def find_sink(application_name: str) -> SinkInformation:
+    for sink in list_all_sinks():
+        if "application.name = \"{}\"".format(application_name) in sink:
+            return parse_sink(sink)
+
+
+def mute_sink(sink_info: SinkInformation, mute: bool):
+    muted = "1" if mute else "0"
+    call(shlex.split(
+          "pacmd set-sink-input-mute {index} {muted}".format(
+                index=sink_info.index, muted=muted
+          )
+    ))
+
+
+def parse_sink(sink_string_info: str) -> SinkInformation:
+    sink_index = -1
+    is_muted = False
+    for line in sink_string_info.splitlines():
+        line = line.strip()
+
+        if line.startswith("index: "):
+            sink_index = int(line.replace("index: ", ""))
+        if line.startswith("muted: "):
+            is_muted = line.replace("muted: ", "") == "yes"
+
+    return SinkInformation(is_muted=is_muted, index=sink_index)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) <= 2:
+        print("Arguments: <program name> <toggle | mute | unmute>")
+        exit(1)
+
+    program_name = sys.argv[1]
+
+    sink_information = find_sink(program_name)
+
+    if not sink_information:
+        print(
+              "No program with name '{}' found to be playing audio.".format(
+                    program_name
+              )
+        )
+        exit(1)
+
+    mode = sys.argv[2]
+
+    new_status = "Not sure"
+
+    if mode == "toggle":
+        mute_sink(sink_information, not sink_information.is_muted)
+        new_status = "Not muted" if sink_information.is_muted else "Muted"
+    elif mode == "mute":
+        mute_sink(sink_information, True)
+        new_status = "Muted"
+    elif mode == "unmute":
+        mute_sink(sink_information, False)
+        new_status = "Not muted"
+    else:
+        print(
+              "Unknown operation: <{}>,"
+              " allowed are <toggle | mute | unmute>".format(mode)
+        )
+        exit(1)
+
+    print("New status for '{}': {}".format(program_name, new_status))

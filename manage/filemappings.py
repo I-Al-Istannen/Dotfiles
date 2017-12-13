@@ -15,6 +15,10 @@ file_locations: List[Tuple[str, str]] = [
     ),
     ("polybar/scripts/spotify", "~/.config/polybar/scripts/spotify.sh"),
     (
+        "polybar/scripts/ControlProgramMuteStatus",
+        "~/.config/polybar/scripts/ControlProgramMuteStatus"
+    ),
+    (
         "polybar/scripts/math-shortcut-interpreter",
         "~/.config/polybar/scripts/math-shortcut-interpreter"
     ),
