@@ -25,6 +25,7 @@ file_locations: List[Tuple[str, str]] = [
     ("dunst/dunstrc", "~/.config/dunst/dunstrc"),
     ("dunst/test-notifications", "~/.config/dunst/test-notifications"),
     ("compton/compton.conf", "~/.config/compton.conf"),
+    ("rofi/config.rasi", "~/.config/rofi/config.rasi"),
     ("sh/profile", "~/.profile")
 ]
 
