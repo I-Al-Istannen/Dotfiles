@@ -28,6 +28,7 @@ file_locations: List[Tuple[str, str]] = [
     ("rofi/config.rasi", "~/.config/rofi/config.rasi"),
     ("neofetch/config", "~/.config/neofetch/config"),
     ("xcompose/.XCompose", "~/.XCompose"),
+    ("vim-snippets/tex.snip", "~/.vim/snippets/tex.snip"),
     ("sh/profile", "~/.profile")
 ]
 

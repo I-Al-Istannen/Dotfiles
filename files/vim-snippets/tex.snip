@@ -1,0 +1,32 @@
+snippet DottedTableOfContents
+abbr dottedToc
+alias dottedToc
+        % Shot dotted lines in ToC
+        \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+snippet a4Paper
+        \documentclass[a4paper]{article}
+        \usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+
+snippet inputEncoding
+alias encoding
+        \usepackage[utf8]{inputenc}
+        \usepackage{lmodern,textcomp}
+        \usepackage[ngerman]{babel}
+
+snippet ==>
+        $\Rightarrow$
+
+snippet header
+        \usepackage{fancyhdr}
+
+        \fancypagestyle{plain}{%
+            \fancyhf{}
+            \renewcommand{\headrulewidth}{0.5pt}
+            \renewcommand{\footrulewidth}{0.5pt}
+            \fancyhead[L]{***REMOVED***}
+            \fancyhead[R]{\today}
+            \fancyfoot[C]{\thepage}
+        }
+
+        \pagestyle{plain}
