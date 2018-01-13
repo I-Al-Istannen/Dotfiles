@@ -29,6 +29,7 @@ file_locations: List[Tuple[str, str]] = [
     ("neofetch/config", "~/.config/neofetch/config"),
     ("xcompose/.XCompose", "~/.XCompose"),
     ("vim-snippets/tex.snip", "~/.vim/snippets/tex.snip"),
+    ("latex/.latexmkrc", "~/.latexmkrc"),
     ("sh/profile", "~/.profile")
 ]
 
