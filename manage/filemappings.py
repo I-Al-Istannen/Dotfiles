@@ -27,6 +27,7 @@ file_locations: List[Tuple[str, str]] = [
     ("compton/compton.conf", "~/.config/compton.conf"),
     ("rofi/config.rasi", "~/.config/rofi/config.rasi"),
     ("neofetch/config", "~/.config/neofetch/config"),
+    ("xcompose/.XCompose", "~/.XCompose"),
     ("sh/profile", "~/.profile")
 ]
 
