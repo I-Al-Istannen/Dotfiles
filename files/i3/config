@@ -245,7 +245,7 @@ exec --no-startup-id lxpolkit
 exec --no-startup-id xautolock -time 5 -locker fancylock -detectsleep
 exec --no-startup-id polybar -r bar
 exec --no-startup-id pasystray
-exec --no-startup-id fluxgui
+exec --no-startup-id redshift-gtk
 
 # Because enabling it leads to a blackscreen. Go figure, I am probably just too dumb for this
 exec sudo /bin/start_bumblebeed.sh
