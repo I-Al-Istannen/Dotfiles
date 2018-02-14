@@ -1,2 +1,2 @@
 #!/bin/bash
-konsole -p tabtitle="Math shortcut" -e python -i ~/.config/polybar/scripts/math-shortcut-interpreter &
+termite -t "Math shortcut" -e python -i ~/.config/polybar/scripts/math-shortcut-interpreter &

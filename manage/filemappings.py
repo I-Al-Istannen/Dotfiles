@@ -26,10 +26,12 @@ file_locations: List[Tuple[str, str]] = [
     ("dunst/test-notifications", "~/.config/dunst/test-notifications"),
     ("compton/compton.conf", "~/.config/compton.conf"),
     ("rofi/config.rasi", "~/.config/rofi/config.rasi"),
+    ("rofi/rcal", "~/.scripts/rcal"),
     ("neofetch/config", "~/.config/neofetch/config"),
     ("xcompose/.XCompose", "~/.XCompose"),
     ("vim-snippets/tex.snip", "~/.vim/snippets/tex.snip"),
     ("latex/.latexmkrc", "~/.latexmkrc"),
+    ("redshift/redshift.conf", "~/.config/redshift.conf"),
     ("sh/profile", "~/.profile")
 ]
 

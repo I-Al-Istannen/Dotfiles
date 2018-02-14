@@ -26,7 +26,7 @@ set $background  #000000
 set $transparent #000000db
 
 # Wallpaper
-set $wallpaper ~/WALLPAPERS/stars_sky_space_car.png
+set $wallpaper ~/WALLPAPERS/background.jpg
 
 # Windows button
 set $mod Mod4
@@ -215,11 +215,15 @@ bindsym XF86AudioStop exec playerctl stop
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+# BRIGHTNESS
+bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessUp exec light -A 10
+
 # Math shortcut
 for_window [title="Math shortcut"] floating enable, resize set 600 px 200 px, move absolute position center5666
 
 # Start stuff on *just* the right workspace
-assign [class="^Spotify$"] 2
+assign [class="spotify$"] 2
 assign [class="^discord$"] 3
 assign [class="^Firefox$"] 4
 assign [class="^Thunderbird$"] 8
@@ -231,23 +235,30 @@ exec --no-startup-id GTK_THEME=breeze firefox
 exec --no-startup-id GTK_THEME=breeze thunderbird
 
 # Starting things with i3
-exec --no-startup-id feh --bg-scale $wallpaper 
+exec --no-startup-id feh --bg-scale $wallpaper
 exec --no-startup-id kshare
 exec --no-startup-id compton -cCfb
-exec --no-startup-id nm-applet 
-exec --no-startup-id dunst 
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id dunst
 exec --no-startup-id lxpolkit
 exec --no-startup-id xautolock -time 5 -locker fancylock -detectsleep
-exec --no-startup-id polybar -r bar 
-exec --no-startup-id pasystray 
+exec --no-startup-id polybar -r bar
+exec --no-startup-id pasystray
+exec --no-startup-id fluxgui
+
+# Because enabling it leads to a blackscreen. Go figure, I am probably just too dumb for this
+exec sudo /bin/start_bumblebeed.sh
+exec sleep 10 && sudo /bin/disable_bluetooth.sh
+exec sleep 10 && sudo /bin/restore_alsa_config.sh
 
 # Window dont-fuck-i3-up settings and fixes
 for_window [class="Conky"] floating enable, border none
 for_window [class="Peek"] floating enable, border none
-for_window [class="KShare"] floating enable, border normal 0 
-for_window [class="Pavucontrol"] floating enable, border normal 0 
-for_window [class="me.ialistannen.*"] floating enable, border normal 0 
-for_window [instance="Msgcompose"] floating enable, border normal 0 
-for_window [title="IntelliJ IDEA Help"] floating enable, border normal 0 
+for_window [class="KShare"] floating enable, border normal 0
+for_window [class="Pavucontrol"] floating enable, border normal 0
+for_window [class="me.ialistannen.*"] floating enable, border normal 0
+for_window [instance="Msgcompose"] floating enable, border normal 0
+for_window [title="IntelliJ IDEA Help"] floating enable, border normal 0
 for_window [title="^Friends$" class="^Steam$"] floating enable, border normal 0
 for_window [class="Terraria\.bin.*"] floating enable, border normal 0

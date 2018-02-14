@@ -34,7 +34,7 @@ main() {
   echo "$result"
 
   # Unmute if it was not an ad
-  ControlProgramMuteStatus Spotify unmute
+  ControlProgramMuteStatus Spotify unmute &>/dev/null
 }
 
 is_ad() {

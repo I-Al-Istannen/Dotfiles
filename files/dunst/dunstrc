@@ -1,7 +1,7 @@
 # vim: ft=cfg
 
 [global]
-    font = Monospace 10
+    font = SauceCodePro Nerd Font semibold 11
 
     # allow a small subset of html markup:
     # <b>bold</b>

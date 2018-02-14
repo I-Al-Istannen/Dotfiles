@@ -105,3 +105,5 @@ alias :q="exit"
 alias restart-network="nmcli n off && nmcli n on"
 alias ssh="TERM=xterm ssh"
 alias firewall="kcmshell4 ufw"
+alias battery="upower -i $(upower -e | grep 'BAT') | grep -P '(time to)|(percent)' | sed -E 's/.+time to empty: \s+(.+)/\1/' | sed -E 's/.+percentage:\s*(.+%)/\1/' | tr '\n' '| ' | sed -E 's/(.+)\|/\1\n/'"
+alias vlcli='vlc --intf ncurses'
