@@ -52,7 +52,7 @@ tray-padding = 0
 tray-transparent = true
 tray-scale = 1.0
 
-font-0 = "SauceCodeProNerdFont:size=9;2"
+font-0 = "SauceCodePro Nerd Font:size=9;2"
 font-1 = "SourceCodePro+Powerline+Awesome\ Regular:size=9;2"
 font-2 = "NotoEmoji:size=9;2"
 font-3 = "UnifontUpper:size=9;2"
@@ -78,11 +78,27 @@ format = "<label-state> <label-mode> "
 index-sort = false
 wrapping-scroll = false
 
+ws-icon-0 = 1; 
+ws-icon-1 = 2; 
+ws-icon-2 = 3; 
+ws-icon-3 = 4; 
+ws-icon-4 = 5; 5
+ws-icon-5 = 6; 6
+ws-icon-6 = 7; 7
+ws-icon-7 = 8; 
+ws-icon-8 = 9; 9
+ws-icon-9 = 10; 10
+
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.white}
 label-visible-underline = ${colors.foreground}
 label-focused-padding-left = 0
 label-focused-padding-right = 1
+
+label-focused = %icon%
+label-unfocused = %icon%
+;label-urgent = %icon%
+label-visible = %icon%
 
 label-unfocused-padding-right = 1
 label-unfocused-padding-left = 0

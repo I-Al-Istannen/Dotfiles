@@ -52,7 +52,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions dirhistory)
 
 # ===== POWERLEVEL9K CONFIG ===== 
 # Newline after a command, to separate the prompt a bit nicer
@@ -107,3 +107,7 @@ alias ssh="TERM=xterm ssh"
 alias firewall="kcmshell4 ufw"
 alias battery="upower -i $(upower -e | grep 'BAT') | grep -P '(time to)|(percent)' | sed -E 's/.+time to empty: \s+(.+)/\1/' | sed -E 's/.+percentage:\s*(.+%)/\1/' | tr '\n' '| ' | sed -E 's/(.+)\|/\1\n/'"
 alias vlcli='vlc --intf ncurses'
+alias jshell='/usr/lib/jvm/java-9-openjdk/bin/jshell'
+
+# added by travis gem
+[ -f /home/$(whoami)/.travis/travis.sh ] && source /home/$(whoami)/.travis/travis.sh

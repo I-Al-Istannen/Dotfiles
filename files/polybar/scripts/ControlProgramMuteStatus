@@ -30,6 +30,8 @@ def find_sink(application_name: str) -> SinkInformation:
     for sink in list_all_sinks():
         if "application.name = \"{}\"".format(application_name) in sink:
             return parse_sink(sink)
+        elif "application.process.binary = \"{}\"".format(application_name) in sink:
+            return parse_sink(sink)
 
 
 def mute_sink(sink_info: SinkInformation, mute: bool):

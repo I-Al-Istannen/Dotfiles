@@ -236,7 +236,7 @@ exec --no-startup-id GTK_THEME=breeze thunderbird
 
 # Starting things with i3
 exec --no-startup-id feh --bg-scale $wallpaper
-exec --no-startup-id kshare
+exec --no-startup-id kshare --background
 exec --no-startup-id compton -cCfb
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
@@ -249,7 +249,6 @@ exec --no-startup-id redshift-gtk
 
 # Because enabling it leads to a blackscreen. Go figure, I am probably just too dumb for this
 exec sudo /bin/start_bumblebeed.sh
-exec sleep 10 && sudo /bin/disable_bluetooth.sh
 exec sleep 10 && sudo /bin/restore_alsa_config.sh
 
 # Window dont-fuck-i3-up settings and fixes

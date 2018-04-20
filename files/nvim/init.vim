@@ -30,6 +30,8 @@ if dein#load_state('~/.vim/dein')
 
   " Completion for Python
   call dein#add('zchee/deoplete-jedi', {'on_ft': ['python']})
+  " KOTLIN!
+  call dein#add('udalov/kotlin-vim', {'on_ft': ['kotlin']})
   " File browser? This nice little bar replaces that.
   call dein#add('scrooloose/nerdtree')
   " The undotree can be fascinating, just hard to navigate
@@ -61,6 +63,9 @@ if dein#load_state('~/.vim/dein')
   call dein#add('Yggdroot/indentLine')
 
   "  call dein#add('donRaphaco/neotex')
+
+  " Markdown preview
+  call dein#add('suan/vim-instant-markdown', {'on_ft': ['md']})
 
   call dein#add('PotatoesMaster/i3-vim-syntax', {'on_ft': ['i3']})
 
