@@ -1,6 +1,6 @@
 [options]
 font = SauceCodePro Nerd Font semibold 17px
-# font = Monospace 15px
+#font = Iosevka medium 19px
 cursor_shape = underline
 cursor_blink = off
 

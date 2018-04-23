@@ -78,9 +78,9 @@ bindsym $mod+Shift+Right move right
 
 # the alternative is better
 
-bindsym $mod+r exec rofi -show drun
-bindsym $mod+Shift+r exec rofi -show run 
-bindsym $mod+Ctrl+s exec rofi -show ssh -terminal termite 
+bindsym $mod+r exec "rofi -show drun -show-icons -modi drun,window -terminal termite"
+bindsym $mod+Shift+r exec rofi -show run
+#bindsym $mod+Ctrl+s exec rofi -show ssh -terminal termite
 
 # split in horizontal orientation
 bindsym $mod+h split h
@@ -151,7 +151,7 @@ bindsym $mod+Ctrl+mod1+r restart
 bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Lock screen
-bindsym $mod+l exec --no-startup-id xautolock -locknow
+bindsym $mod+l exec --no-startup-id betterlockscreen -l dimblur
 
 # Print screen -> use kshare
 # bindsym Print exec spectacle
@@ -242,7 +242,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
 exec --no-startup-id lxpolkit
-exec --no-startup-id xautolock -time 5 -locker fancylock -detectsleep
 exec --no-startup-id polybar -r bar
 exec --no-startup-id pasystray
 exec --no-startup-id redshift-gtk
@@ -250,6 +249,9 @@ exec --no-startup-id redshift-gtk
 # Because enabling it leads to a blackscreen. Go figure, I am probably just too dumb for this
 exec sudo /bin/start_bumblebeed.sh
 exec sleep 10 && sudo /bin/restore_alsa_config.sh
+
+# Cache the wallpaper for locking
+exec --no-startup-id betterlockscreen -u ~/WALLPAPERS/
 
 # Window dont-fuck-i3-up settings and fixes
 for_window [class="Conky"] floating enable, border none
