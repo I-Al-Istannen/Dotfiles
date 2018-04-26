@@ -8,8 +8,5 @@ if __name__ == '__main__':
     matches = re.findall("connected.+?(\d+)x\d+", xrandr_output)
     widths = [int(x) for x in matches]
 
-    with open("/tmp/test.txt", "w") as file:
-        file.write("Picked " + str(widths))
-
     # Output the smallest element
     print(min(widths))
