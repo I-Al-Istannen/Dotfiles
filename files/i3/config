@@ -170,14 +170,6 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        #bindsym j resize shrink width 10 px or 5 ppt
-        #bindsym k resize grow height 10 px or 5 ppt
-        #bindsym l resize shrink height 10 px or 5 ppt
-        #bindsym semicolon resize grow width 10 px or 5 ppt
-	
-	# vim != desktop
-
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 5 ppt
         bindsym Down resize grow height 10 px or 5 ppt
         bindsym Up resize shrink height 10 px or 5 ppt
@@ -190,10 +182,24 @@ mode "resize" {
 
 bindsym $mod+Ctrl+r mode "resize"
 
+# Configure external monitors
+set $configure_external_monitors "Open (l)xrandr or (r)efresh polybar"
+mode $configure_external_monitors {
+        bindsym l exec --no-startup-id i3-msg mode "default" && lxrandr
+        bindsym r exec --no-startup-id i3-msg mode "default" && refresh_polybar
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Monitor configuration
+bindsym $mod+x mode $configure_external_monitors
+
 # i3bar
 bar {
         mode dock
-        verbose no 
+        verbose no
         position top
 #        status_command i3status 
         i3bar_command polybar bar
@@ -242,7 +248,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
 exec --no-startup-id lxpolkit
-exec --no-startup-id polybar -r bar
+exec --no-startup-id polybar_wrapper.sh
 exec --no-startup-id pasystray
 exec --no-startup-id redshift-gtk
 

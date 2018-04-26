@@ -32,7 +32,12 @@ file_locations: List[Tuple[str, str]] = [
     ("vim-snippets/tex.snip", "~/.vim/snippets/tex.snip"),
     ("latex/.latexmkrc", "~/.latexmkrc"),
     ("redshift/redshift.conf", "~/.config/redshift.conf"),
-    ("sh/profile", "~/.profile")
+    ("sh/profile", "~/.profile"),
+    ("scripts/polybar_wrapper.sh", "~/.scripts/polybar_wrapper.sh"),
+    ("scripts/rcal", "~/.scripts/rcal"),
+    ("scripts/refresh_polybar", "~/.scripts/refresh_polybar"),
+    ("scripts/ShowLsColours", "~/.scripts/ShowLsColours"),
+    ("scripts/smallest_resolution_width.py", "~/.scripts/smallest_resolution_width.py")
 ]
 
 
