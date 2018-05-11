@@ -47,7 +47,7 @@ if dein#load_state('~/.vim/dein')
   " Sets the indentation depth to a heuristically determined value
   call dein#add('tpope/vim-sleuth')
   " Online thesaurus!
-"  call dein#add('Ron89/thesaurus_query.vim')
+  call dein#add('Ron89/thesaurus_query.vim')
   " Tex!
   " call dein#add('lervag/vimtex', {'on_ft': ['tex']})
   call dein#add('lervag/vimtex', {'on_ft': ['tex']})
@@ -108,7 +108,6 @@ let g:vimtex_compiler_latexmk = {
       \ 'options' : [
       \   '-verbose',
       \   '-file-line-error',
-      \   '-synctex=1',
       \   '-interaction=nonstopmode',
       \ ],
       \}
@@ -117,11 +116,17 @@ let g:vimtex_compiler_latexmk = {
 let g:indentLine_char = '▏'
 
 " Thesaurus
-let g:tq_enabled_backends=["thesaurus_com","woxikon_de","openoffice_en"]
+let g:tq_enabled_backends=["woxikon_de", "thesaurus_com","openoffice_en"]
 let g:tq_language=["de", "en"]
 
 " Neosnippets
 let g:neosnippet#snippets_directory="~/.vim/snippets"
+" }}}
+
+" Leader Setup {{{
+" Set the leader char
+let mapleader = ","
+let maplocalleader = ","
 " }}}
 
 " Plugin commands and mappings {{{
@@ -169,7 +174,7 @@ map <expr> <Plug>(delimitMateCR) <SID>TriggerAbb()."\<C-R>=delimitMate#ExpandRet
 " }}}
 
 " Thesaurus {{{
-nmap <leader>W :ThesaurusQueryLookupCurrentWord<CR>
+nmap <Leader>T :ThesaurusQueryLookupCurrentWord<CR>
 " }}}
 " }}}
 
@@ -184,10 +189,6 @@ nmap <Space>    za
 " Clear the search highlights according to
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#comment5906101_657484
 command C let @/=""
-
-" Set the leader char
-let mapleader = ","
-let maplocalleader = ","
 
 " Format Json using python
 com! FormatJSON %!python -m json.tool
@@ -250,4 +251,3 @@ set smartcase
 " Tex flavour
 let g:tex_flavor = 'latex'
 " }}}
-
