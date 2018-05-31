@@ -186,6 +186,16 @@ nmap <C-o>      <ESC>:NERDTreeFind<CR>
 " Make space toggle foldings
 nmap <Space>    za
 
+" Nicer window handling
+nnoremap <silent> <M-Right> <c-w>l
+nnoremap <silent> <M-Left> <c-w>h
+nnoremap <silent> <M-Up> <c-w>k
+nnoremap <silent> <M-Down> <c-w>j
+nnoremap <silent> <M-S-Right> <c-w>L
+nnoremap <silent> <M-S-Left> <c-w>H
+nnoremap <silent> <M-S-Up> <c-w>K
+nnoremap <silent> <M-S-Down> <c-w>J
+
 " Clear the search highlights according to
 " https://stackoverflow.com/questions/657447/vim-clear-last-search-highlighting#comment5906101_657484
 command C let @/=""
@@ -219,6 +229,10 @@ autocmd FileType tex setlocal spelllang=de,en
 autocmd FileType tex setlocal conceallevel=0
 " I have no freaking clue why vim is slow with them
 autocmd FileType tex setlocal norelativenumber
+
+autocmd FileType md setlocal spell
+autocmd FileType md setlocal spelllang=de,en
+autocmd FileType md setlocal conceallevel=0
 "}}}1
 
 
@@ -247,6 +261,9 @@ set list
 set ignorecase
 " Enable case sensitiue search when your pattern contains an uppercase letter otherwise it will be insensitive
 set smartcase
+
+" Preview commands
+set inccommand=nosplit
 
 " Tex flavour
 let g:tex_flavor = 'latex'

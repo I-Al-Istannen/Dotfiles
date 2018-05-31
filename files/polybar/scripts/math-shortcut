@@ -1,2 +1,2 @@
 #!/bin/bash
-termite -t "Math shortcut" -e python -i ~/.config/polybar/scripts/math-shortcut-interpreter &
+rofi -show calc -modi calc -no-show-match -no-sort

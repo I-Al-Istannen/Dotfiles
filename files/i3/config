@@ -226,6 +226,7 @@ bindsym XF86MonBrightnessDown exec light -U 10
 bindsym XF86MonBrightnessUp exec light -A 10
 
 # Math shortcut
+bindsym $mod+M exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort
 for_window [title="Math shortcut"] floating enable, resize set 600 px 200 px, move absolute position center5666
 
 # Start stuff on *just* the right workspace

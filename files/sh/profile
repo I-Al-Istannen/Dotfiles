@@ -1,7 +1,7 @@
 export GTK_IM_MODULE="xim"
 export QT_QPA_PLATFORMTHEME=qt5ct
 export ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
-export PATH="${PATH}:/usr/lib/ruby/gems/2.4.0:/home/$(whoami)/.gem/ruby/2.4.0/bin:/home/$(whoami)/.scripts"
+export PATH="${PATH}:/usr/lib/ruby/gems/2.5.0:/home/$(whoami)/.gem/ruby/2.5.0/bin:/home/$(whoami)/.scripts"
 export EDITOR="nvim"
 
 setxkbmap -option compose:rctrl
