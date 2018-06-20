@@ -28,9 +28,9 @@ def list_all_sinks() -> List[str]:
 
 def find_sink(application_name: str) -> SinkInformation:
     for sink in list_all_sinks():
-        if "application.name = \"{}\"".format(application_name) in sink:
+        if "application.name = \"{}\"".format(application_name).lower() in sink.lower():
             return parse_sink(sink)
-        elif "application.process.binary = \"{}\"".format(application_name) in sink:
+        elif "application.process.binary = \"{}\"".format(application_name).lower() in sink.lower():
             return parse_sink(sink)
 
 
