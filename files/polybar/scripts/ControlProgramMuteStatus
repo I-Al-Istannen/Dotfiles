@@ -26,13 +26,16 @@ def list_all_sinks() -> List[str]:
     return sinks
 
 
-def find_sink(application_name: str) -> SinkInformation:
-    for sink in list_all_sinks():
-        if "application.name = \"{}\"".format(application_name).lower() in sink.lower():
-            return parse_sink(sink)
-        elif "application.process.binary = \"{}\"".format(application_name).lower() in sink.lower():
-            return parse_sink(sink)
+def find_sinks(application_name: str) -> List[SinkInformation]:
+    return [parse_sink(sink) for sink in list_all_sinks() if is_target_sink(application_name, sink)]
 
+def is_target_sink(application_name: str, sink_information: SinkInformation) -> bool:
+    if "application.name = \"{}\"".format(application_name).lower() in sink_information.lower():
+        return True
+    elif "application.process.binary = \"{}\"".format(application_name).lower() in sink_information.lower():
+        return True
+    else:
+        return False
 
 def mute_sink(sink_info: SinkInformation, mute: bool):
     muted = "1" if mute else "0"
@@ -64,9 +67,9 @@ if __name__ == '__main__':
 
     program_name = sys.argv[1]
 
-    sink_information = find_sink(program_name)
+    sinks = find_sinks(program_name)
 
-    if not sink_information:
+    if not sinks:
         print(
               "No program with name '{}' found to be playing audio.".format(
                     program_name
@@ -79,13 +82,16 @@ if __name__ == '__main__':
     new_status = "Not sure"
 
     if mode == "toggle":
-        mute_sink(sink_information, not sink_information.is_muted)
-        new_status = "Not muted" if sink_information.is_muted else "Muted"
+        for sink_information in sinks:
+            mute_sink(sink_information, not sink_information.is_muted)
+            new_status = "Not muted" if sink_information.is_muted else "Muted"
     elif mode == "mute":
-        mute_sink(sink_information, True)
+        for sink_information in sinks:
+            mute_sink(sink_information, True)
         new_status = "Muted"
     elif mode == "unmute":
-        mute_sink(sink_information, False)
+        for sink_information in sinks:
+            mute_sink(sink_information, False)
         new_status = "Not muted"
     else:
         print(
