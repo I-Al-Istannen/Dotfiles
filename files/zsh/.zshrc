@@ -83,6 +83,11 @@ source $ZSH/oh-my-zsh.sh
 # Provide a guess for where the command is defined
 source /usr/share/doc/pkgfile/command-not-found.zsh
 
+# Use FZF for back/reverse search
+source /usr/share/fzf/key-bindings.zsh
+# Use FZF for file glob completion and other zsh functions
+source /usr/share/fzf/completion.zsh
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -107,7 +112,10 @@ alias ssh="TERM=xterm ssh"
 alias firewall="kcmshell4 ufw"
 alias battery="upower -i $(upower -e | grep 'BAT') | grep -P '(time to)|(percent)' | sed -E 's/.+time to empty: \s+(.+)/\1/' | sed -E 's/.+percentage:\s*(.+%)/\1/' | tr '\n' '| ' | sed -E 's/(.+)\|/\1\n/'"
 alias vlcli='vlc --intf ncurses'
-alias jshell='/usr/lib/jvm/java-9-openjdk/bin/jshell'
+alias jshell='/usr/lib/jvm/java-10-openjdk/bin/jshell'
+alias duplicate='termite -d $(pwd) &'
+alias ffind=$'fzf --preview \'[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || bat --style=numbers --decorations always --color always {}\''
+alias ncdu='ncdu --color=dark'
 
 # added by travis gem
 [ -f /home/$(whoami)/.travis/travis.sh ] && source /home/$(whoami)/.travis/travis.sh
