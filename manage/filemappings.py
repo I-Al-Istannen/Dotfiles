@@ -4,6 +4,7 @@ from typing import List, Tuple
 file_locations: List[Tuple[str, str]] = [
     ("zsh/.zshrc", "~/.zshrc"),
     ("zsh/.zprofile", "~/.zprofile"),
+    ("zsh/.bash_aliases", "~/.bash_aliases"),
     ("termite/config", "~/.config/termite/config"),
     ("nvim/init.vim", "~/.config/nvim/init.vim"),
     ("i3/config", "~/.i3/config"),
