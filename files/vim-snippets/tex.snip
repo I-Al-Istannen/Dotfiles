@@ -14,6 +14,16 @@ alias encoding
         \usepackage{lmodern,textcomp}
         \usepackage[ngerman]{babel}
 
+snippet hyperref
+alias refs urls
+        \usepackage{hyperref}
+
+        \hypersetup{%
+            colorlinks=true,
+            linkcolor=royalblue,
+            urlcolor=royalblue
+        }
+
 snippet ==>
         $\Rightarrow$
 
@@ -30,3 +40,23 @@ snippet header
         }
 
         \pagestyle{plain}
+
+snippet emphasize
+alias emph *
+        \emph{${1:text}}
+
+snippet bolden
+alias bold **
+        \textbf{${1:text}}
+
+snippet underline
+alias uline __
+        \underline{${1:text}}
+
+snippet quote
+alias "
+        \enquote{${1}}
+
+snippet url
+alias href
+        \href{${1:url}}{${2:description}}
