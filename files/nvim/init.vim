@@ -183,6 +183,8 @@ map  <F5>	<ESC>:UndotreeToggle<cr>
 imap <F5>	<ESC>:UndotreeToggle<CR>
 nmap <C-o>      <ESC>:NERDTreeFind<CR>
 
+xmap <Leader>e  <Plug>(neosnippet_expand_target)
+
 " Make space toggle foldings
 nmap <Space>    za
 
