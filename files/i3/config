@@ -25,9 +25,6 @@ set $darkwhite   #a89984
 set $background  #000000
 set $transparent #000000db
 
-# Wallpaper
-set $wallpaper ~/WALLPAPERS/background.jpg
-
 # Windows button
 set $mod Mod4
 
@@ -242,7 +239,7 @@ exec --no-startup-id GTK_THEME=breeze firefox
 exec --no-startup-id GTK_THEME=breeze thunderbird
 
 # Starting things with i3
-exec --no-startup-id feh --bg-scale $wallpaper
+exec --no-startup-id ~/WALLPAPERS/random.sh ~/WALLPAPERS
 exec --no-startup-id kshare --background
 exec --no-startup-id compton -cCfb
 exec --no-startup-id nm-applet
