@@ -16,5 +16,4 @@ alias duplicate='termite -d $(pwd) &'
 alias ffind=$'fzf --preview \'[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || bat --style=numbers --decorations always --color always {}\''
 alias ncdu='ncdu --color=dark'
 
-# KIT
-alias kitssh="ssh *@i08fs1.ira.uka.de"
+source ~/.ssh_aliases
