@@ -1,5 +1,10 @@
 alias realias="source ~/.bash_aliases"
 
+# Run evince in the background, but make it not report errors
+function evinceq() {
+    sh -c "evince '$1' &2>/dev/null &" &> /dev/null
+}
+
 
 alias ls="ls --color=auto"
 alias grep="grep --color"
