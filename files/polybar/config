@@ -116,7 +116,7 @@ label-empty-padding = 2
 
 [module/network]
 type = internal/network
-interface = wlp2s0
+interface = wlan0
 label-disconnected = ✘
 label-connected =  %downspeed:8%  %upspeed:8%
 
