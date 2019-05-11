@@ -9,6 +9,8 @@ set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 " I was tired of this plugin not loading correctly
 set runtimepath+=~/.vim/dein/repos/github.com/lervag/vimtex/
 
+set mouse=a
+
 filetype plugin indent on
 syntax enable
 
@@ -65,13 +67,20 @@ if dein#load_state('~/.vim/dein')
   "  call dein#add('donRaphaco/neotex')
 
   " Markdown preview
-  call dein#add('suan/vim-instant-markdown', {'on_ft': ['md']})
+  call dein#add('suan/vim-instant-markdown', {'on_ft': ['markdown']})
 
   call dein#add('PotatoesMaster/i3-vim-syntax', {'on_ft': ['i3']})
 
   " Color Schemes
   call dein#add('mhartington/oceanic-next')
 
+  " Git gutter
+  call dein#add('airblade/vim-gitgutter')
+
+  " Haskell {{{
+  call dein#add('neovimhaskell/haskell-vim', {'on_ft': ['haskell']})
+  call dein#add('alx741/vim-stylishask', {'on_ft': ['haskell']})
+  " }}}
   " }}}
 
   " Required:
@@ -97,7 +106,7 @@ endif
 "let g:airline#extensions#tabline#show_buffers=2
  " }}}
 
-" VimTeX + Deoplete
+" VimTeX + Deoplete {{{
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
@@ -111,6 +120,7 @@ let g:vimtex_compiler_latexmk = {
       \   '-interaction=nonstopmode',
       \ ],
       \}
+" }}}
 
 " Indent lines
 let g:indentLine_char = '▏'
@@ -121,6 +131,21 @@ let g:tq_language=["de", "en"]
 
 " Neosnippets
 let g:neosnippet#snippets_directory="~/.vim/snippets"
+
+" Haskell-vim {{{
+let g:haskell_classic_highlighting = 1
+let g:haskell_indent_if = 3
+let g:haskell_indent_case = 2
+let g:haskell_indent_let = 4
+let g:haskell_indent_where = 6
+let g:haskell_indent_before_where = 2
+let g:haskell_indent_after_bare_where = 2
+let g:haskell_indent_do = 3
+let g:haskell_indent_in = 1
+let g:haskell_indent_guard = 2
+let g:haskell_indent_case_alternative = 1
+let g:cabal_indent_section = 2
+" }}}
 " }}}
 
 " Leader Setup {{{
@@ -131,33 +156,16 @@ let maplocalleader = ","
 
 " Plugin commands and mappings {{{
 " deoplete {{{
-function! s:deoplete_lazy_enable()
- autocmd! deoplete_lazy_enable
- augroup! deoplete_lazy_enable
- call deoplete#enable()
-endfunction
-augroup deoplete_lazy_enable
- autocmd!
- autocmd CursorHold * call s:deoplete_lazy_enable()
- autocmd InsertEnter * call s:deoplete_lazy_enable()
-        \ | silent! doautocmd <nomodeline> deoplete InsertEnter
-augroup END
-
-let g:deoplete#enable_smart_case = 1
-autocmd CompleteDone * pclose
+let g:deoplete#enable_at_startup = 1
 " }}}
 
 " Neosnippet {{{2
 " Use tab to expand
-"imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-"  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><TAB>
-      \ neosnippet#expandable_or_jumpable() ?
-      \    "\<Plug>(neosnippet_expand_or_jump)" :
-      \       pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
       \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
+imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 " }}}2
 
 " Delimit mate fix indentation {{{
@@ -176,6 +184,12 @@ map <expr> <Plug>(delimitMateCR) <SID>TriggerAbb()."\<C-R>=delimitMate#ExpandRet
 " Thesaurus {{{
 nmap <Leader>T :ThesaurusQueryLookupCurrentWord<CR>
 " }}}
+
+" Haskell stylush {{{
+let g:stylishask_on_save = 0
+au FileType haskell nnoremap <silent> <leader>ll :Stylishask<CR>
+" }}}
+
 " }}}
 
 " Commands and mappings {{{
@@ -266,6 +280,9 @@ set smartcase
 
 " Preview commands
 set inccommand=nosplit
+
+" Time between git gutter updates
+set updatetime=100
 
 " Tex flavour
 let g:tex_flavor = 'latex'
