@@ -268,3 +268,4 @@ for_window [instance="Msgcompose"] floating enable, border normal 0
 for_window [title="IntelliJ IDEA Help"] floating enable, border normal 0
 for_window [title="^Friends$" class="^Steam$"] floating enable, border normal 0
 for_window [class="Terraria\.bin.*"] floating enable, border normal 0
+for_window [title="Datenbank entsperren - KeePassXC"] floating enable, border normal 0
