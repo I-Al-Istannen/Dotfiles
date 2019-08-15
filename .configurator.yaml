@@ -1,0 +1,6 @@
+phases:
+ - load-defaults
+ - select-theme
+ - process-themes
+ - configs
+ - post-processing
