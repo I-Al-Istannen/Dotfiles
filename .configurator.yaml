@@ -2,5 +2,6 @@ phases:
  - load-defaults
  - select-theme
  - process-themes
+ - actions
  - configs
  - post-processing
