@@ -4,4 +4,6 @@ phases:
  - process-themes
  - actions
  - configs
+ - packages
+ - install-packages
  - post-processing
