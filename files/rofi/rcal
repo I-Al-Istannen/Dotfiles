@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+month='N/A'
+
+if [[ -z "$1" ]]; then
+    month=$(date '+%B')
+else
+    month="$1"
+fi
+
+
+    #-dmenu \
+
+export TERM=xterm
+cal $month --color=always \
+    | sed 's/\x1b\[[7;]*m/\<b\>\<u\>/g' \
+    | sed 's/\x1b\[[27;]*m/\<\/u\>\<\/b\>/g' \
+    | tail -n +2 \
+    | rofi \
+    -dmenu \
+    -markup-rows \
+    -font "SauceCodePro Nerd Font semibold 14" \
+    -width -30 \
+    -location 0 \
+    -m -5 \
+    -p "$month" > /dev/null

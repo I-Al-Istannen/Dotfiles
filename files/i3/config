@@ -1,0 +1,275 @@
+# (No) Title Bars
+for_window [class="^.*"] border pixel 0
+
+# floating window borders
+default_floating_border pixel 0
+# (No) Title Bars (what "pixel" does) and no border (0 pixels)
+default_border pixel 0
+
+# Gaps
+gaps inner 10
+gaps outer 0
+smart_gaps on
+
+set $black       #212121
+set $darkblack   #000000
+set $red         #fb4934
+set $darkred     #cc241d
+set $green       #b8bb26
+set $darkgreen   #98971a
+set $yellow      #fabd2f
+set $darkyellow  #d79921
+set $blue        #83a598
+set $darkblue    #458588
+set $magenta     #d3869b
+set $darkmagenta #b16286
+set $cyan        #8ec07c
+set $darkcyan    #689d6a
+set $white       #ebdbb2
+set $darkwhite   #a89984
+set $background  #000000
+set $transparent #000000db
+
+# Windows button
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+#font pango:Noto Sans 11
+font pango:SauceCodePro Nerd Font 10
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Start a terminal
+bindsym $mod+Return exec termite
+
+# Kill focused window
+bindsym $mod+q kill
+
+# No focus popups
+no_focus [window_role="pop-up"]
+ 
+# change focus
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
+# arrow key master race
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# the alternative is better
+
+bindsym $mod+r exec "rofi -show drun -show-icons -modi drun,window -terminal termite"
+bindsym $mod+Shift+r exec rofi -show run
+#bindsym $mod+Ctrl+s exec rofi -show ssh -terminal termite
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+t layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+client.focused          #404552 #404552 #ffffff #00DA8E
+client.focused_inactive #232833 #232832 #ffffff #484e50
+client.unfocused        #232833 #232832 #888888 #292d2e 
+client.urgent           #C10004 #900000 #ffffff #900000
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+s scratchpad show
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+s move scratchpad
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Ctrl+mod1+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Lock screen
+bindsym $mod+l exec --no-startup-id betterlockscreen -l dimblur
+
+# Print screen -> use kshare
+# bindsym Print exec spectacle
+
+# Window Switcher
+bindsym $mod+Tab exec rofi -show window
+
+# Do not focus the window you hover over
+focus_follows_mouse no
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym Left resize shrink width 10 px or 5 ppt
+        bindsym Down resize grow height 10 px or 5 ppt
+        bindsym Up resize shrink height 10 px or 5 ppt
+        bindsym Right resize grow width 10 px or 5 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+Ctrl+r mode "resize"
+
+# Configure external monitors
+set $configure_external_monitors "Open (l)xrandr or (r)efresh polybar"
+mode $configure_external_monitors {
+        bindsym l exec --no-startup-id i3-msg mode "default" && lxrandr
+        bindsym r exec --no-startup-id i3-msg mode "default" && refresh_polybar
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Monitor configuration
+bindsym $mod+x mode $configure_external_monitors
+
+# i3bar
+bar {
+        mode dock
+        verbose no
+        position top
+        i3bar_command polybar bar
+}
+
+# MEDIA!
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# BRIGHTNESS
+bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessUp exec light -A 10
+
+# Math shortcut
+bindsym $mod+M exec --no-startup-id rofi -show calc -modi calc -no-show-match -no-sort
+for_window [title="Math shortcut"] floating enable, resize set 600 px 200 px, move absolute position center5666
+
+# Start stuff on *just* the right workspace
+assign [class="^discord$"] 3
+assign [class="^firefox$"] 4
+assign [class="^Thunderbird$"] 8
+assign [title="Discord Bots"] 9
+exec --no-startup-id spotify
+# exec --no-startup-id discord-canary You are basically crashing i3...
+# exec --no-startup-id konsole -p tabtitle="Discord Bots" -e bash ~/start-discord-bots.sh
+exec --no-startup-id GTK_THEME=breeze firefox
+exec --no-startup-id GTK_THEME=breeze thunderbird
+
+# Starting things with i3
+exec --no-startup-id ~/WALLPAPERS/random.sh ~/WALLPAPERS
+exec --no-startup-id kshare --background
+exec --no-startup-id compton -cCfb
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id dunst
+exec --no-startup-id lxpolkit
+exec --no-startup-id polybar_wrapper.sh
+exec --no-startup-id pasystray
+exec --no-startup-id redshift-gtk
+
+# Because enabling it leads to a blackscreen. Go figure, I am probably just too dumb for this
+exec sudo /bin/start_bumblebeed.sh
+exec sleep 10 && sudo /bin/restore_alsa_config.sh
+
+# Cache the wallpaper for locking
+exec --no-startup-id betterlockscreen -u ~/WALLPAPERS/
+
+# polkit agent
+exec --no-startup-id lxqt-policykit-agent
+
+# Window dont-fuck-i3-up settings and fixes
+for_window [class="Spotify"] move to workspace 2
+
+for_window [class="Conky"] floating enable, border none
+for_window [class="Peek"] floating enable, border none
+for_window [class="KShare"] floating enable, border normal 0
+for_window [class="Pavucontrol"] floating enable, border normal 0
+for_window [class="me.ialistannen.*"] floating enable, border normal 0
+for_window [instance="Msgcompose"] floating enable, border normal 0
+for_window [title="IntelliJ IDEA Help"] floating enable, border normal 0
+for_window [title="^Friends$" class="^Steam$"] floating enable, border normal 0
+for_window [class="Terraria\.bin.*"] floating enable, border normal 0
+for_window [title="Datenbank entsperren - KeePassXC"] floating enable, border normal 0
+
+# Temporary
+for_window [class="org-jis-icatcher-*"] floating enable, border normal 0
+for_window [class="org-iMage-*"] floating enable, border normal 0

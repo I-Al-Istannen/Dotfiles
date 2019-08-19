@@ -1,0 +1,4 @@
+#!/bin/bash
+notify-send -u low -a "App" "Summary" "Description"
+notify-send -u normal -a "App" "Summary" "Description"
+notify-send -u critical -a "App" "Summary" "Description"
