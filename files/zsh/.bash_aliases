@@ -6,7 +6,6 @@ function evinceq() {
 }
 
 
-alias ls="ls --color=auto"
 alias grep="grep --color"
 alias thunderbird="GTK_THEME=breeze thunderbird"
 alias firefox="GTK_THEME=breeze firefox"
@@ -20,5 +19,9 @@ alias jshell='/usr/lib/jvm/java-10-openjdk/bin/jshell'
 alias duplicate='termite -d $(pwd) &'
 alias ffind=$'fzf --preview \'[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || bat --style=numbers --decorations always --color always {}\''
 alias ncdu='ncdu --color=dark'
+
+#alias ls="ls --color=auto"
+alias ls="exa"
+alias la='exa -lag'
 
 source ~/.ssh_aliases

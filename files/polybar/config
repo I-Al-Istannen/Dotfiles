@@ -138,9 +138,9 @@ format-unmounted-underline = #FF6347
 
 [module/date]
 type = internal/date
-date-alt =   %A, %d %B %Y %H:%M
+date-alt =   %A, %d %B %Y %H:%M:%S
 date = %{F#928374}%{F-} %H:%M
-interval = 5
+interval = 1
 format-foreground = ${colors.foreground}
 format-padding = 1
 

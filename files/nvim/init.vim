@@ -10,9 +10,9 @@ set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 set runtimepath+=~/.vim/dein/repos/github.com/lervag/vimtex/
 
 set mouse=a
+" File based udo
+set undofile
 
-filetype plugin indent on
-syntax enable
 
 " Dein {{{
 " Required:
@@ -31,7 +31,7 @@ if dein#load_state('~/.vim/dein')
 
 
   " Completion for Python
-  call dein#add('zchee/deoplete-jedi', {'on_ft': ['python']})
+  "call dein#add('zchee/deoplete-jedi', {'on_ft': ['python']})
   " KOTLIN!
   call dein#add('udalov/kotlin-vim', {'on_ft': ['kotlin']})
   " File browser? This nice little bar replaces that.
@@ -77,10 +77,20 @@ if dein#load_state('~/.vim/dein')
   " Git gutter
   call dein#add('airblade/vim-gitgutter')
 
+  " Floobits
+  "call dein#add('Floobits/floobits-neovim')
+
   " Haskell {{{
   call dein#add('neovimhaskell/haskell-vim', {'on_ft': ['haskell']})
   call dein#add('alx741/vim-stylishask', {'on_ft': ['haskell']})
   " }}}
+
+  " LSP
+  call dein#add('autozimu/LanguageClient-neovim', {
+    \ 'rev': 'next',
+    \ 'build': 'bash install.sh',
+    \ })
+
   " }}}
 
   " Required:
@@ -122,6 +132,9 @@ let g:vimtex_compiler_latexmk = {
       \}
 " }}}
 
+" Tex flavour
+let g:tex_flavor = 'latex'
+
 " Indent lines
 let g:indentLine_char = '▏'
 
@@ -157,15 +170,19 @@ let maplocalleader = ","
 " Plugin commands and mappings {{{
 " deoplete {{{
 let g:deoplete#enable_at_startup = 1
+" Use smartcase.
+call deoplete#custom#option('smart_case', v:true)
 " }}}
 
 " Neosnippet {{{2
-" Use tab to expand
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" Expand with tab otherwise complete
+imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
+" Cycle back with shift tab
 imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-inoremap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
+" Enter: Close popup and complete
+imap <silent><expr><CR> pumvisible() ? deoplete#close_popup()."\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+
+
 " }}}2
 
 " Delimit mate fix indentation {{{
@@ -185,9 +202,37 @@ map <expr> <Plug>(delimitMateCR) <SID>TriggerAbb()."\<C-R>=delimitMate#ExpandRet
 nmap <Leader>T :ThesaurusQueryLookupCurrentWord<CR>
 " }}}
 
+" Language server client {{{
+let g:LanguageClient_serverCommands = { 'haskell': ['hie-wrapper', "--lsp"], 'python': ['pyls'] }
+let g:LanguageClient_useFloatingHover = 1
+
+" CTRL+SHIFT+A
+autocmd FileType haskell,python nnoremap <C-S-A> :call LanguageClient_contextMenu()<CR>
+autocmd FileType haskell,python map <C-q> :call LanguageClient#textDocument_hover()<CR>
+autocmd FileType haskell,python map <C-b> :call LanguageClient#textDocument_definition()<CR>
+" SHIFT + F6
+autocmd FileType haskell,python map <F18> :call LanguageClient#textDocument_rename()<CR>
+" CTRL+ ALT + L
+autocmd FileType haskell,python map <M-C-L> :call LanguageClient#textDocument_formatting()<CR>
+" ALT + 7
+autocmd FileType haskell,python map <M-7> :call LanguageClient#textDocument_references()<CR>
+" ALT + Enter
+autocmd FileType haskell,python map <M-CR> :call LanguageClient#textDocument_codeAction()<CR>
+autocmd FileType haskell,python map <Leader>ls :call LanguageClient#textDocument_documentSymbol()<CR>
+
+" nicer highlighting for haskell Operators
+autocmd FileType haskell,python highlight Operator gui=bold guifg=#d175bc
+
+"let g:LanguageClient_loggingFile = expand('~/.vim/LanguageClient.log')
+"let g:LanguageClient_loggingLevel = 'DEBUG'
+" }}}
+
 " Haskell stylush {{{
 let g:stylishask_on_save = 0
 au FileType haskell nnoremap <silent> <leader>ll :Stylishask<CR>
+" }}}
+
+" Haskell IDE Engine {{{
 " }}}
 
 " }}}
@@ -249,8 +294,8 @@ autocmd FileType tex setlocal norelativenumber
 autocmd FileType md setlocal spell
 autocmd FileType md setlocal spelllang=de,en
 autocmd FileType md setlocal conceallevel=0
-"}}}1
 
+"}}}1
 
 " General SET commands {{{
 
@@ -266,6 +311,7 @@ set clipboard+=unnamedplus
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+
 " The character at the beginning of a wrapped line.
 set showbreak=↪\ 
 " The list chars. Possible value for "eol:↲" 
@@ -284,6 +330,12 @@ set inccommand=nosplit
 " Time between git gutter updates
 set updatetime=100
 
-" Tex flavour
-let g:tex_flavor = 'latex'
+" Do not add two spaces after periods when wrapping
+set nojoinspaces
+
+" Only conceal in normal and command mode, show everything when editing/visual
+set concealcursor=nc
+
+filetype plugin indent on
+syntax enable
 " }}}
