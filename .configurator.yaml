@@ -1,9 +1,0 @@
-phases:
- - load-defaults
- - select-theme
- - process-themes
- - actions
- - configs
- - packages
- - install-packages
- - post-processing
