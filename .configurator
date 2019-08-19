@@ -1,3 +1,4 @@
+# vim: ft=yaml
 phases:
  - load-defaults
  - select-theme
